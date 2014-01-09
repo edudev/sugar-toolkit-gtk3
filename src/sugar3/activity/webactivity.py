@@ -58,7 +58,11 @@ class WebActivity(Gtk.Window):
         settings = self._web_view.get_settings()
         settings.set_property("enable-developer-extras", True)
 
-        self._web_view.load_uri("activity://%s/index.html" % self._bundle_id)
+        uri = "activity://%s/index.html" % self._bundle_id
+        if handle.uri:
+            # uri += "#&togetherjs=" + handle.uri
+            uri = handle.uri
+        self._web_view.load_uri(uri)
 
         self.set_title(activity.get_bundle_name())
 
